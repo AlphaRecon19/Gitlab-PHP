@@ -26,4 +26,13 @@ abstract class Base
         return $request->fetch($url);
     }
 
+    public function save($url, $path)
+    {
+        $request = new Request($this->getContainer());
+
+        return $request->fetch($url, 'GET', [
+            'sink' => $path
+        ]);
+    }
+
 }

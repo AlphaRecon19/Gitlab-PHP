@@ -7,12 +7,12 @@ namespace Gitlab;
 
 class Project extends Base
 {
-    public function fetchAllProjects()
+    public function fetchAll()
     {
         return $this->get('/api/v3/projects');
     }
 
-    public function fetchProjectFile($projectId, $filePath, $branch = 'master')
+    public function fetchFile($projectId, $filePath, $branch = 'master')
     {
         $file = $this->get('/api/v3/projects/' . $projectId . '/repository/files?file_path=' . $filePath . '&ref=' . $branch);
         if ($file['encoding'] === 'base64') {
@@ -20,5 +20,12 @@ class Project extends Base
         }
 
         return $file;
+    }
+
+    public function fetchArchive($namespace, $name, $path, $branch = 'master')
+    {
+        $file = $this->save("/$namespace/$name/repository/archive.tar.gz?ref=$branch", $path);
+
+        return true;
     }
 }
