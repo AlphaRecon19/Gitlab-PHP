@@ -26,6 +26,20 @@ abstract class Base
         return $request->fetch($url);
     }
 
+    public function post($url, $data = [])
+    {
+        $request = new Request($this->getContainer());
+
+        return $request->fetch($url, 'POST');
+    }
+
+    public function delete($url)
+    {
+        $request = new Request($this->getContainer());
+
+        return $request->fetch($url, 'DELETE');
+    }
+
     public function save($url, $path)
     {
         $request = new Request($this->getContainer());

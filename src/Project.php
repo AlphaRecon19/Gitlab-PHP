@@ -7,6 +7,16 @@ namespace Gitlab;
 
 class Project extends Base
 {
+    public function create($name)
+    {
+        return $this->post('/api/v3/projects/?name=' . $name);
+    }
+
+    public function purge($id)
+    {
+        return $this->delete('/api/v3/projects/' . $id);
+    }
+
     public function fetchAll()
     {
         return $this->get('/api/v3/projects');
