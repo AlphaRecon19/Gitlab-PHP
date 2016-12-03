@@ -7,9 +7,15 @@ namespace Gitlab;
 
 class Project extends Base
 {
-    public function create($name)
+    public function create($name, $config = [])
     {
-        return $this->post('/api/v3/projects/?name=' . $name);
+        $url = '/api/v3/projects/?name=' . $name;
+
+        foreach ($config as $key => $value) {
+            $url .= '&' . $key . '=' . $value;
+        }
+
+        return $this->post($url);
     }
 
     public function purge($id)
