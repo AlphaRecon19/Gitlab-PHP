@@ -23,6 +23,11 @@ class Project extends Base
         return $this->delete('/api/v3/projects/' . $id);
     }
 
+    public function fetch($id)
+    {
+        return $this->get('/api/v3/projects/' . $id);
+    }
+
     public function fetchAll()
     {
         return $this->get('/api/v3/projects');
@@ -41,6 +46,14 @@ class Project extends Base
     public function fetchArchive($namespace, $name, $path, $branch = 'master')
     {
         $file = $this->save("/$namespace/$name/repository/archive.tar.gz?ref=$branch", $path);
+
+        return true;
+    }
+
+    public function fetchAvatar($id, $path)
+    {
+        $data = $this->fetch($id);
+        $file = $this->save($data['avatar_url'], $path);
 
         return true;
     }

@@ -12,7 +12,10 @@ class Request extends Base
     public function fetch($url, $type = "GET", $data = [])
     {
         $app = $this->getContainer();
-        $url = $app->getUrl() . $url;
+        //Check if $url already has the base url
+        if (strpos($url, $app->getUrl()) === false) {
+            $url = $app->getUrl() . $url;
+        }
 
         $client = new Client();
         $data = $data + [
