@@ -25,6 +25,24 @@ class ProjectTest extends BaseUnit
             }
         }
 
+        $gitlab = $this->getGitlab();
+        $project = new Project($gitlab);
+        $data = $project->fetch($test['id']);
+
+        $this->assertSame($test['id'], $data['id']);
+        $this->assertSame($test['description'], $data['description']);
+
+        $this->assertSame($test['ssh_url_to_repo'], $data['ssh_url_to_repo']);
+        $this->assertSame($test['http_url_to_repo'], $data['http_url_to_repo']);
+        $this->assertSame($test['web_url'], $data['web_url']);
+
+        $this->assertSame($test['issues_enabled'], $data['issues_enabled']);
+        $this->assertSame($test['merge_requests_enabled'], $data['merge_requests_enabled']);
+        $this->assertSame($test['builds_enabled'], $data['builds_enabled']);
+        $this->assertSame($test['wiki_enabled'], $data['wiki_enabled']);
+        $this->assertSame($test['snippets_enabled'], $data['snippets_enabled']);
+        $this->assertSame($test['shared_runners_enabled'], $data['shared_runners_enabled']);
+        $this->assertSame($test['visibility_level'], $data['visibility_level']);
     }
 
     public function testCreateProject()
