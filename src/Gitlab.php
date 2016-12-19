@@ -19,6 +19,12 @@ class Gitlab
      */
     protected $token;
 
+    /**
+     * Set the SSL certificate verification behavior of a request.
+     * @link http://docs.guzzlephp.org/en/latest/request-options.html#verify
+     * @var boolean
+     */
+    protected $verifySSL = false;
 
     /**
      * Get the value of Gitlab URL
@@ -66,6 +72,16 @@ class Gitlab
         $this->token = $token;
 
         return $this;
+    }
+
+    public function getVerifySSL()
+    {
+        return $this->verifySSL;
+    }
+
+    public function setVerifySSL($verifySSL)
+    {
+        $this->verifySSL = $verifySSL;
     }
 
     public function __construct($url, $token)

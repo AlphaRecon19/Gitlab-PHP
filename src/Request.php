@@ -17,7 +17,8 @@ class Request extends Base
             $url = $app->getUrl() . $url;
         }
 
-        $client = new Client();
+        $verify = $app->getVerifySSL();
+        $client = new Client(['verify' => $verify]);
         $data = $data + [
             'headers' => [
                 'PRIVATE-TOKEN' => $app->getToken(),
