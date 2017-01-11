@@ -53,7 +53,12 @@ class Project extends Base
     public function fetchAvatar($id, $path)
     {
         $data = $this->fetch($id);
-        $file = $this->save($data['avatar_url'], $path);
+
+        if ($data['avatar_url'] === null) {
+            return false;
+        }
+
+        $this->save($data['avatar_url'], $path);
 
         return true;
     }
