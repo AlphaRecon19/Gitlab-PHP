@@ -15,4 +15,11 @@ class Commits extends Base
 
         return $this->get($url);;
     }
+
+    public function fetchSingle($id, $sha)
+    {
+        $url = '/api/v3/projects/'. $id .'/repository/commits/' . $sha;
+
+        return $this->get($url);;
+    }
 }
