@@ -62,4 +62,12 @@ class Project extends Base
 
         return true;
     }
+
+    /**
+     * @link https://docs.gitlab.com/ce/api/projects.html#search-for-projects-by-name
+     */
+    public function search($query)
+    {
+        return $this->get('/api/v3/projects/search/' . $query);
+    }
 }
