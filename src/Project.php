@@ -28,9 +28,9 @@ class Project extends Base
         return $this->get('/api/v3/projects/' . $id);
     }
 
-    public function fetchAll()
+    public function fetchAll($limit = 100)
     {
-        return $this->get('/api/v3/projects');
+        return $this->get('/api/v3/projects/?per_page=' . $limit);
     }
 
     public function fetchFile($projectId, $filePath, $branch = 'master')

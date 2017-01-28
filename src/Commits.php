@@ -20,6 +20,6 @@ class Commits extends Base
     {
         $url = '/api/v3/projects/'. $id .'/repository/commits/' . $sha;
 
-        return $this->get($url);;
+        return $this->get($url);
     }
 }
