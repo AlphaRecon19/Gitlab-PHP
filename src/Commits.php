@@ -9,11 +9,11 @@ class Commits extends Base
 {
     protected $project;
 
-    public function fetch($id)
+    public function fetch($id, $limit = 30)
     {
-        $url = '/api/v3/projects/'. $id .'/repository/commits';
+        $url = '/api/v3/projects/'. $id .'/repository/commits/?per_page=' . $limit;
 
-        return $this->get($url);;
+        return $this->get($url);
     }
 
     public function fetchSingle($id, $sha)
