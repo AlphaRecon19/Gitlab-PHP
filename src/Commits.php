@@ -7,7 +7,19 @@ namespace Gitlab;
 
 class Commits extends Base
 {
-    protected $project;
+    public function create($id, $branch, $message, $email, array $actions)
+    {
+        $url = "/api/v3/projects/$id/repository/commits";
+
+        $data = [
+            'branch_name' => $branch,
+            'commit_message' => $message,
+            'author_email' => $email,
+            "actions" => $actions
+        ];
+
+        return $this->post($url, $data);
+    }
 
     public function fetch($id, $limit = 30)
     {

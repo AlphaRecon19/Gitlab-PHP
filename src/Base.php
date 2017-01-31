@@ -46,7 +46,7 @@ abstract class Base
     public function post($url, $data = [])
     {
         $request = $this->createRequest();
-        return $request->fetch($url, 'POST');
+        return $request->fetch($url, 'POST', ['json' => $data]);
     }
 
     public function delete($url)
