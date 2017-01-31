@@ -9,6 +9,8 @@ abstract class Base
 {
     protected $app;
 
+    protected $request;
+
     public function __construct(Gitlab $gitlab)
     {
         $this->app = $gitlab;
@@ -19,31 +21,43 @@ abstract class Base
         return $this->app;
     }
 
+    public function createRequest()
+    {
+        if ($this->request) {
+            return $this->request;
+        }
+        $this->request = new Request($this->getContainer());
+
+        return $this->request;
+    }
+
+    public function getRequestHeaders()
+    {
+        $request = $this->createRequest();
+        return $request->getHeaders();
+    }
+
     public function get($url)
     {
-        $request = new Request($this->getContainer());
-
+        $request = $this->createRequest();
         return $request->fetch($url);
     }
 
     public function post($url, $data = [])
     {
-        $request = new Request($this->getContainer());
-
+        $request = $this->createRequest();
         return $request->fetch($url, 'POST');
     }
 
     public function delete($url)
     {
-        $request = new Request($this->getContainer());
-
+        $request = $this->createRequest();
         return $request->fetch($url, 'DELETE');
     }
 
     public function save($url, $path)
     {
-        $request = new Request($this->getContainer());
-
+        $request = $this->createRequest();
         return $request->fetch($url, 'GET', [
             'sink' => $path
         ]);
