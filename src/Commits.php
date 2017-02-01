@@ -7,7 +7,7 @@ namespace Gitlab;
 
 class Commits extends Base
 {
-    public function create($id, $branch, $message, $email, array $actions)
+    public function create($id, $branch, $message, $email, $name, array $actions)
     {
         $url = "/api/v3/projects/$id/repository/commits";
 
@@ -15,6 +15,7 @@ class Commits extends Base
             'branch_name' => $branch,
             'commit_message' => $message,
             'author_email' => $email,
+            'author_name' => $name,
             "actions" => $actions
         ];
 
