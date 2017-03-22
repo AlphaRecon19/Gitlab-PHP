@@ -14,10 +14,8 @@ class Request extends Base
     public function fetch($url, $type = "GET", $data = [])
     {
         $app = $this->getContainer();
-        //Check if $url already has the base url
-        if (strpos($url, $app->getUrl()) === false) {
-            $url = $app->getUrl() . $url;
-        }
+        $urlParse = parse_url($url);
+        $url = $app->getUrl() . $urlParse['path'];
 
         $verify = $app->getVerifySSL();
         $client = new Client(['verify' => $verify]);
@@ -31,7 +29,6 @@ class Request extends Base
 
         $response = (string) $request->getBody();
         $response = json_decode($response, true);
-
 
         return $response;
     }
