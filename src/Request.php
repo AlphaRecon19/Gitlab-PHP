@@ -15,8 +15,16 @@ class Request extends Base
     {
         $app = $this->getContainer();
         $urlParse = parse_url($url);
-        $url = $app->getUrl() . $urlParse['path'];
 
+        if (array_key_exists('query', $urlParse)) {
+            parse_str($urlParse['query'], $queryArray);
+
+            if ($queryArray) {
+                $data['query'] = $queryArray;
+            }
+        }
+
+        $url = $app->getUrl() . $urlParse['path'];
         $verify = $app->getVerifySSL();
         $client = new Client(['verify' => $verify]);
         $data = $data + [
@@ -24,6 +32,7 @@ class Request extends Base
                 'PRIVATE-TOKEN' => $app->getToken(),
             ],
         ];
+
         $request = $client->request($type, $url, $data);
         $this->setHeaders($request->getHeaders());
 
