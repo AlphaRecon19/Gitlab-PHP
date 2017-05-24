@@ -70,4 +70,12 @@ class Project extends Base
     {
         return $this->get('/api/v3/projects/search/' . $query);
     }
+
+    public function addUserToRepo($id, $userId, $accessLevel = 30)
+    {
+        return $this->post('/api/v4/projects/'.$id.'/members', [
+            'user_id' => $userId,
+            'access_level' => $accessLevel
+        ]);
+    }
 }
