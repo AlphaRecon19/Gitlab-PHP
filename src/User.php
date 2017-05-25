@@ -26,12 +26,17 @@ class User extends Base
     {
         $url = '/api/v3/users/' . $id;
         return $this->get($url);
-
     }
 
     public function fetchAll()
     {
         $url = '/api/v3/users';
+        return $this->get($url);
+    }
+
+    public function fetchAllKeysForUser($id)
+    {
+        $url = '/api/v3/users/'. $id .'/keys';
         return $this->get($url);
     }
 }
