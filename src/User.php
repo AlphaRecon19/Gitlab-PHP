@@ -39,4 +39,14 @@ class User extends Base
         $url = '/api/v3/users/'. $id .'/keys';
         return $this->get($url);
     }
+
+    public function addKeyToUser($id, $key, $title)
+    {
+        $url = '/api/v3/users/'. $id .'/keys';
+
+        return $this->post($url, [
+            'title' => $title,
+            'key' => $key
+        ]);
+    }
 }
