@@ -5,6 +5,8 @@
 
 namespace Gitlab;
 
+use violuke\RsaSshKeyFingerprint\FingerprintGenerator;
+
 class User extends Base
 {
     public function create($email, $username, $name, $password, $config = [])
@@ -37,7 +39,17 @@ class User extends Base
     public function fetchAllKeysForUser($id)
     {
         $url = '/api/v3/users/'. $id .'/keys';
-        return $this->get($url);
+        $keys = $this->get($url);
+
+        if (!is_array($keys)) {
+            return false;
+        }
+
+        foreach ($keys as $key => $value) {
+            $keys[$key]['fingerprint'] = FingerprintGenerator::getFingerprint($value['key']);
+        }
+
+        return $keys;
     }
 
     public function addKeyToUser($id, $key, $title)
