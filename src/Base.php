@@ -63,4 +63,9 @@ abstract class Base
         ]);
     }
 
+    public function put($url)
+    {
+        $request = $this->createRequest();
+        return $request->fetch($url, 'PUT');
+    }
 }

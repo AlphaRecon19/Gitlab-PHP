@@ -78,4 +78,9 @@ class Project extends Base
             'access_level' => $accessLevel
         ]);
     }
+
+    public function unprotectBranch($id, $branch)
+    {
+        return $this->put('/v4/projects/'. $id .'/repository/branches/'. $branch .'/unprotect');
+    }
 }
