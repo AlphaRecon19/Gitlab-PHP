@@ -81,6 +81,6 @@ class Project extends Base
 
     public function unprotectBranch($id, $branch)
     {
-        return $this->put('/v4/projects/'. $id .'/repository/branches/'. $branch .'/unprotect');
+        return $this->put('/api/v4/projects/'. $id .'/repository/branches/'. $branch .'/unprotect');
     }
 }
