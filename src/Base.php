@@ -68,4 +68,13 @@ abstract class Base
         $request = $this->createRequest();
         return $request->fetch($url, 'PUT');
     }
+
+    public function buildUrl($url = '', array $params)
+    {
+        foreach ($params as $key => $value) {
+            $url .= '&' . $key . '=' . urlencode($value);
+        }
+
+        return $url;
+    }
 }

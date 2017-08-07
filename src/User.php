@@ -17,9 +17,7 @@ class User extends Base
         $config['name'] = $name;
         $config['password'] = $password;
 
-        foreach ($config as $key => $value) {
-            $url .= '&' . $key . '=' . $value;
-        }
+        $url = $this->buildUrl($url, $config);
 
         return $this->post($url);
     }

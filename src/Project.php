@@ -9,11 +9,8 @@ class Project extends Base
 {
     public function create($name, $config = [])
     {
-        $url = '/api/v3/projects/?name=' . $name;
-
-        foreach ($config as $key => $value) {
-            $url .= '&' . $key . '=' . $value;
-        }
+        $url = '/api/v3/projects/?name=' . urlencode($name);
+        $url = $this->buildUrl($url, $config);
 
         return $this->post($url);
     }
